@@ -1,0 +1,128 @@
+---
+layout: page
+type: project
+title: Unannounced Title
+engine: Unreal Engine 4
+logo: Soulcade-Interactive-Logo-1.png
+order: 1
+---
+
+<p>This is part of an upcomming title I'm woking on with <a href="https://soulcadeinteractive.com/" target="_blank">Soulcade Interactive.</a> The premise is for a third-person stealth fishing game, and I'm contributing primarity to the game's stealth and fishing mechanics.</p>
+
+<h2>Stealth Mechanics</h2>
+<p>The player has to make their way through enemy AI who watch over a designated area. The guard types include patrollers who investigate distractions the player makes, and turrets which shoot the player for crossing their line of sight.</p>
+<div class="row">
+	<div class="col-7 col-12-medium">
+		<ul>
+			<li>The patrollers are setup to have their patrol points laid out in the level editor.</li>
+			<li>On the player side, I worked on the ability to hide behind cover. The player moves along walls with the help of splines drawn around each hiding spot.</li>
+			<li>To make editing easier, I made it possible to save them as predefined shapes in a way that mirrored Unreal’s BSP tools.</li>
+			<li>The player can distract guards by either knocking while hugging a wall, or throwing a rock.</li>
+		</ul>
+	</div>
+	<div class="col-5 col-12-medium">
+		<div class="video-gallery">
+			<video controls muted loop style="display: block;">
+				<source src="/assets/vid/soulcade/patroller-setup.1920x1080.mp4" type="video/mp4">
+			</video>
+			<video controls muted loop style="display: none;">
+				<source src="/assets/vid/soulcade/stealth-setup.1920x1080.mp4" type="video/mp4">
+			</video>
+			</video>
+			<video controls muted loop style="display: none;">
+				<source src="/assets/vid/soulcade/patroller-example.1920x1080.mp4" type="video/mp4">
+			</video>
+			</video>
+			<video controls muted loop style="display: none;">
+				<source src="/assets/vid/soulcade/sentry-example.1920x1080.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div class="slideshow-list">
+			<a><img style="background-image: url('/assets/img/soulcade/patroller-setup-thumb.jpg');"></a>
+			<a><img style="background-image: url('/assets/img/soulcade/stealth-setup-thumb.jpg');"></a>
+			<a><img style="background-image: url('/assets/img/soulcade/patroller-example-thumb.jpg');"></a>
+			<a><img style="background-image: url('/assets/img/soulcade/sentry-example-thumb.jpg');"></a>
+		</div>
+	</div>
+</div>
+
+<h2>Fishing Mechanics</h2>
+<p>My contributions for the fishing mechanics came mainly in the form of tools. Setting up a minigame is handled by an actor that lets designers designate all the necessary parameters:</p>
+<div class="row">
+	<div class="col-7 col-12-medium">
+		<ul>
+			<li>The fishing area and the path along the pond to follow, using the same movement tool for stealth sections.</li>
+			<li>The type of fish and debris that can spawn here and their probability of showing up.</li>
+			<li>Where in the pond the objects will spawn and what direction they’ll face.</li>
+			<li>Because the fish all share functionality, they all stem from one class and draw their differences from a data table of attributes (holding vales like mesh, score value, timed hooked, etc.). The fish themselves are then pooled into an array where the spawner can reuse an inactive fish and swap out all its data. Each fish also comes with a designated child actor for artists to add type-specific items like particle effects.</li>
+		</ul>
+	</div>
+	<div class="gallery col-5 col-12-medium" is-grid>
+		{% include image-gallery.html image="/assets/img/soulcade/fishing-spot.690x552.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/soulcade/fish-movement.1186x596.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/soulcade/fish-spawn-point.1608x735.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/soulcade/fish-data.1186x596.jpg" caption="" thumb="" useBackground="true" %}
+	</div>
+</div>
+
+<script>
+	window.OnSetup = window.OnSetup || [];
+
+	function GetThumbName(str)
+	{
+		return str.substring(
+			str.lastIndexOf('/') + 1,
+			str.indexOf("-thumb")
+		);
+	}
+
+	function ResizeVideo()
+	{
+		var videos = $("video");
+			
+		for(var i = 0; i < videos.length; ++i)
+		{
+			var width = $(videos[i]).parent().width();
+			var src = $(videos[i]).children("source").attr("src").split(".")[1].split("x");
+			var aspect = parseInt(src[1]) / parseInt(src[0]);
+			$(videos[i]).width(width);
+			$(videos[i]).height(aspect * width);
+			$(videos[i]).parent().height(aspect * width);
+		}
+	}
+
+	function SetupVideoSlideshow()
+	{
+		$(".slideshow-list img").click(function()
+		{
+			var name = GetThumbName($(this).css("background-image"));
+			var target = $("source[src*='" + name + "']").parent();
+			var videos = target.parent().children("video");
+
+			if(!target[0].paused)
+				return;
+
+			for(var i = 0; i < videos.length; ++i)
+			{
+				if($(videos[i]).css("display") == "block")
+				{
+					videos[i].pause();
+					videos[i].currentTime = 0;
+					$(videos[i]).css("display", "none");
+				}
+			}
+
+			target.css("display", "block");
+			target[0].play();
+		});
+	}
+
+	window.OnSetup.push(function(event)
+	{
+		$(window).on("resize", ResizeVideo);
+		ResizeVideo();
+		SetupVideoSlideshow();
+	});
+</script>
+
+{% include photo-swipe.html %}

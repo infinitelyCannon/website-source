@@ -1,0 +1,156 @@
+///
+/// Editorial by HTML5 UP
+/// html5up.net | @ajlkn
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+
+/* Image */
+
+.image {
+	border-radius: _size(border-radius);
+	border: 0;
+	display: inline-block;
+	position: relative;
+
+	img {
+		border-radius: _size(border-radius);
+		display: block;
+	}
+
+	&.left,
+	&.right {
+		max-width: 40%;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	&.left {
+		float: left;
+		padding: 0 1.5em 1em 0;
+		top: 0.25em;
+	}
+
+	&.right {
+		float: right;
+		padding: 0 0 1em 1.5em;
+		top: 0.25em;
+	}
+
+	&.fit {
+		display: block;
+		margin: 0 0 _size(element-margin) 0;
+		width: 100%;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	&.main {
+		display: block;
+		margin: 0 0 (_size(element-margin) * 1.5) 0;
+		width: 100%;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+a.image {
+	overflow: hidden;
+
+	img {
+		@include vendor('transition', 'transform #{_duration(transition)} ease');
+	}
+
+	&:hover {
+		img {
+			@include vendor('transform', 'scale(1.075)');
+		}
+	}
+}
+
+// 	User Edit: Gallery Settings
+.gallery {
+	&[is-grid] {
+		display: grid;
+		grid-template-rows: 1fr 1fr;
+		grid-auto-flow: column;
+		column-gap: 10px;
+		row-gap: 10px;
+		height: 600px;
+	}
+
+	a {
+		cursor: pointer;
+	}
+}
+
+.gallery-image {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 13% 33%;
+	width: 100%;
+	height: 100%;
+
+	&+span {
+		display: none;
+	}
+}
+
+// Didn't know where else to put this. Probably a new file.
+.video-display {
+	display: flex;
+	flex-direction: column;
+
+	span {
+		text-align: center;
+	}
+}
+
+.video-gallery
+{
+	width: 100%;
+	position: relative;
+
+	video
+	{
+		position: absolute;
+	}
+}
+
+.slideshow-list
+{
+	display: flex;
+	justify-content: space-evenly;
+	height: 170px;
+
+	img
+	{
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.2s ease;
+
+		&:hover
+		{
+			transform: scale(1.075);
+		}
+	}
+
+	a
+	{
+		flex-grow: 1;
+		margin: 10px;
+		cursor: pointer;
+	}
+
+	@include breakpoint('<=medium')
+	{
+		height: 100px;
+	}
+}

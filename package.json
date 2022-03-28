@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-site",
+  "version": "1.0.0",
+  "description": "The portfolio website for Dakarai Simmons",
+  "scripts": {
+    "start": "bundle exec jekyll serve",
+    "watch": "webpack --watch",
+    "build": "webpack && bundle exec jekyll build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dakarai Simmons",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "three": "^0.137.0"
+  }
+}

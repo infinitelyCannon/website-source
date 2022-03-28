@@ -1,0 +1,132 @@
+---
+layout: page
+type: project
+title: Catformer
+year: 2019
+logo: cat_logo.png
+engine: Unity
+order: 2
+---
+<p>Catformer is an infinite scrolling 2D platformer. With it’s one-finger mechanic the challenge is to climb as high up as possible while dodging hazards. This was a one semester, six-team project.</p>
+
+<div class="row">
+	<div class="gallery col-12" is-grid>
+		{% include image-gallery.html image="/assets/img/catformer/cat0.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/catformer/cat1.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/catformer/cat2.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/catformer/cat3.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/catformer/cat4.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/catformer/cat5.720x1280.jpg" caption="" thumb="" useBackground="true" %}
+	</div>
+</div>
+
+<br />
+<h2>Level Building</h2>
+
+<div class="row">
+	<div class="col-4">
+		<div class="video-display">
+			<video controls muted autoplay loop>
+				<source src="/assets/vid/cat/background-scroll.1592x984.mp4" type="video/mp4">
+			</video>
+			<span>A testrun of the background prefab</span>
+		</div>
+	</div>
+	<div class="col-8">
+		<p>
+			The team decided the progression of the level would involve different environmental stages that loop a certain number of times before transitioning to the next one. So my first responsibility was to make a prefab with adjustable properties:<br/>
+			&emsp;&emsp;&bull;	The speed for each layer<br />
+			&emsp;&emsp;&bull;	The total number of stages<br />
+			&emsp;&emsp;&bull;	The sprites for each layer<br />
+			&emsp;&emsp;&bull;	How many times each stage would loop before the next one<br />
+			The background code also handled the task of scaling the sprites so their width matched the screen.
+		</p>
+	</div>
+</div>
+
+<h2>Platforming</h2>
+
+<p>There are three types of platforms the player jumps on depending on the stage they’re in and the system for this spawns them randomly with a check that prevents players from relying on one pattern to guarantee a safe upward path.</p>
+
+<div class="row">
+	<div class="col-4">
+		<div class="video-display">
+			<video controls muted autoplay loop>
+				<source src="/assets/vid/cat/particle-pooling.1382x1032.mp4" type="video/mp4">
+			</video>
+			<span>Demonstration of recycling platforms</span>
+		</div>
+	</div>
+	<div class="col-8">
+		<p>The platforms themselves are managed by a pooling system. A fixed list of platforms are instantiated at the beginning (based on the highest observed number of active platforms), and then disappearing platforms are queued to reuse when spawning new ones. To make platforms reusable, I saved the common data between them into a scriptable object, which the parent spawner passes into one platform prefab. One difficult part of this was how every platform has a particle effect attached to it, but particle system components can’t be referenced individually like sprites or numbers. To address this, we saved a prefab with the particle system attached to it, then the platform’s script would mirror the properties over using C#’s reflection system.</p>
+	</div>
+</div>
+
+<br />
+<strong>Reflection Loops</strong>
+<pre>
+	<code class="language-csharp">
+// The property info for the ParticleSystem class type and the saved instance
+PropertyInfo[] particleProps = particles.GetType().GetProperties();
+ParticleSystem savedSystem = data.ParticlePrefab.GetComponent&lt;ParticleSystem&gt;();
+
+// For each property in this class,
+foreach (var property in particleProps)
+{
+	// Grab each particle module (except subemitters which aren't used)
+	if(property.PropertyType.Name.Contains("Module") &amp;&amp; !property.PropertyType.Name.Contains("SubEmitters"))
+	{
+		// Grab the correspoinding module object on this GameObject, grab its properties,
+		object module = property.GetValue(particles);
+		PropertyInfo[] properties = module.GetType().GetProperties();
+		object newModule = savedSystem.GetType().GetProperty(property.Name).GetValue(savedSystem);
+
+		// Then loop through these properties and set them to the value from the prefab object.
+		foreach (var prop in properties)
+			if(prop.GetIndexParameters().Length == 0 &amp;&amp; prop.CanWrite)
+				prop.SetValue(module, prop.GetValue(newModule));
+	}
+}
+
+// Repeat the process for the ParticleSystemRenderer.
+ParticleSystemRenderer renderer = GetComponentInChildren&lt;ParticleSystemRenderer&gt;(),
+	savedRenderer = data.ParticlePrefab.GetComponent&lt;ParticleSystemRenderer&gt;();
+particleProps = renderer.GetType().GetProperties();
+
+foreach(var property in particleProps)
+{
+	if(property.GetIndexParameters().Length == 0 &amp;&amp; property.CanRead &amp;&amp; property.CanWrite &amp;&amp; !property.Name.Contains("materials", true))
+	{
+		if (property.Name.Contains("material", true) &amp;&amp; !property.Name.Equals("sharedMaterial"))
+			continue;
+		property.SetValue(renderer, property.GetValue(savedRenderer));
+	}
+}
+	</code>
+</pre>
+
+<script>
+	window.OnSetup = window.OnSetup || [];
+
+	function ResizeVideo()
+	{
+		var videos = $("video");
+			
+			for(var i = 0; i < videos.length; ++i)
+			{
+				var width = $(videos[i]).parent().width();
+				var src = $(videos[i]).children("source").attr("src").split(".")[1].split("x");
+				var aspect = parseInt(src[1]) / parseInt(src[0]);
+				$(videos[i]).width(width);
+				$(videos[i]).height(aspect * width);
+			}
+	}
+
+	window.OnSetup.push(function(event)
+	{
+		$(window).on("resize", ResizeVideo);
+		ResizeVideo();
+	});
+</script>
+
+{% include photo-swipe.html %}

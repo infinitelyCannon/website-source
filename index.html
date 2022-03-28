@@ -1,0 +1,77 @@
+---
+layout: default
+title: Dakarai Simmons | Portfolio Site
+---
+
+<section id="banner">
+	<div class="content">
+		<header style="position: relative;">
+			<h1><span class="pronouce" title="Duh-car-ree (Click to hear)"><span id="tts" class="iconify" data-icon="mdi-volume-high"></span>Dakarai</span> Simmons</h1>
+		</header>
+		<p>
+			I'm a Game Design Graduate from the University of Central Florida. I specilize in programming because I love thinking in terms of systems.
+		</p>
+	</div>
+	<span id="preview" class="image object" style="min-height: 350px;">
+		<canvas style="border: 1px solid black;"></canvas>
+	</span>
+</section>
+
+<section>
+	<header class="major">
+		<h2>Projects</h2>
+	</header>
+	<div class="posts">
+		{% assign projects = site.pages | where: "type", "project" | sort: "order" %}
+		{% for project in projects %}
+		<article>
+			<a class="image" href="{{ project.url }}">
+				<img src="/assets/img/projects/{{ project.logo }}"> 
+			</a>
+			<h3>{{ project.title }} | {{ project.engine }}</h3>
+			<p>{{ site.data.excerpts[forloop.index0].excerpt }}</p>
+			<ul class="actions">
+				<li>
+					<a class="button" href="{{ project.url }}">More</a>
+				</li>
+			</ul>
+		</article>
+		{% endfor %}
+	</div>
+</section>
+
+<script src="assets/js/index.js"></script>
+<script>
+      var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function() {
+          return function(text) {
+            if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+            console.log(text);
+          };
+        })(),
+        printErr: function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          console.error(text);
+        },
+        canvas: (function() {})(),
+        setStatus: function(text) {},
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        },
+		onRuntimeInitialized: async _ =>{
+			InitCanvas();
+		}
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function() {
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+</script>
+<script async type="text/javascript" src="/assets/js/prime.js"></script>

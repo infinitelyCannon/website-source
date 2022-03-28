@@ -1,0 +1,9 @@
+{% assign size = include.image | split: "." %}
+<a class="image" {% if include.thumb.size > 0 %}has-thumb="true"{% endif %} {% if include.useBackground == "true" %}use-background="true"{% endif %} data-med="{{include.image}}" data-med-size="{{size[1]}}">
+	{% if include.thumb.size > 0 %}
+	<img class="gallery-image" {% if include.useBackground == "true" %}style="background-image: url('{{include.thumb}}');"{% else %}src="{{include.thumb}}"{% endif %} />
+	{% else %}
+	<img class="gallery-image" {% if include.useBackground == "true" %}style="background-image: url('{{include.image}}');"{% else %}src="{{include.image}}"{% endif %} />
+	{% endif %}
+	<span>{{include.caption}}</span>
+</a>

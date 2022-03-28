@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/photoswipe.css" />
+		<link rel="stylesheet" href="/assets/css/default-skin/default-skin.css" />
+		<link rel="stylesheet" media="screen and (prefers-color-scheme: light)" href="/assets/css/atom-one-light.css" />
+		<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/assets/css/atom-one-dark.css" />
+		<title>{{ page.title }}</title>
+		<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+		{% seo %}
+    </head>
+    <body onload="Setup(event)">
+        <div id="wrapper">
+			<div id="main">
+				<div class="inner">
+					{% include header.html %}
+					{{ content }}
+				</div>
+			</div>
+		</div>
+		<script src="/assets/js/photoswipe.min.js"></script>
+		<script src="/assets/js/photoswipe-ui-default.min.js"></script>
+		<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js"></script>
+		<script>
+			function Setup(e)
+			{
+				hljs.highlightAll();
+				if(window.OnSetup != undefined && window.OnSetup.length > 0)
+				{
+					for(var i = 0; i < window.OnSetup.length; ++i)
+						window.OnSetup[i](e);
+				}
+			}
+
+			function ClearMigrate()
+			{
+				$("#migrate-msg").removeClass("from-github");
+			}
+		</script>
+    </body>
+</html>

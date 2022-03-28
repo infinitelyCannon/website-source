@@ -1,0 +1,59 @@
+<header>
+	<img src="/assets/img/infinitelyCannon.svg" />
+    <div id="header">
+		<a class="logo" href="/index.html">
+			<strong>Dakarai Simmons</strong> | Portfolio Site
+		</a>
+		<ul class="icons">
+			{% if site.twitter_url %}
+			<li>
+				<a href="{{site.twitter_url}}" title="Twitter" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-twitter"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.instagram_url %}
+			<li>
+				<a href="{{site.instagram_url}}" title="Instagram" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-instagram"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.github_url %}
+			<li>
+				<a href="{{ site.github_url }}" title="GitHub" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-github"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.stackoverflow_url %}
+			<li>
+				<a href="{{ site.stackoverflow_url }}" title="Stack Overflow" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-stack-overflow"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.linkedin_url %}
+			<li>
+				<a href="{{site.linkedin_url}}" title="Linkedin" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-linkedin"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.email %}
+			<li>
+				<a href="mailto:{{ site.email }}" title="email" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-email"></span>
+				</a>
+			</li>
+			{% endif %}
+			{% if site.resume_url %}
+			<li>
+				<a href="{{site.resume_url}}" title="Resume" target="_blank" class="icon brands">
+					<span class="iconify" data-icon="mdi-file-pdf"></span>
+				</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</header>

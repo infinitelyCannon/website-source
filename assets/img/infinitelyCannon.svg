@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="456" height="456" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g>
+  <rect width="456" height="456" style="fill:#2f4274"/>
+ </g>
+ <g>
+  <g id="Hat">
+   <path d="m83.4 147.8s-10.646-0.58576-11-12.5 11-12.5 11-12.5h67l-9e-5 -93.5h158l9e-5 93.5h75s7-1.1144 7 12.5-7 12.5-7 12.5z" style="fill:#fff"/>
+  </g>
+  <g id="Head" transform="translate(5.9 -1.6)">
+   <path id="Face" transform="matrix(1.173 0 0 4.5523 -17.637 -439.37)" d="m298.4 131.09a91.217 19.445 0 0 1-45.779 16.851 91.217 19.445 0 0 1-91.345-0.0578 91.217 19.445 0 0 1-45.309-16.909" style="fill:#fff"/>
+   <circle id="LeftEye" transform="translate(173.08 83.439)" cx="100" cy="100" r="13.5" style="fill:#2f4274"/>
+   <circle id="RightEye" transform="translate(76.667 83.439)" cx="100" cy="100" r="13.5" style="fill:#2f4274"/>
+   <g id="Glasses" transform="translate(-1.1,-3.2)">
+    <path d="m202.3 171.68h-52v29.755h52z" style="fill:none;stroke-width:1.6;stroke:#2f4274"/>
+    <path d="m202.2 187s9.6253-6.5 23.3-6.5 22.8 6.5 22.8 6.5" style="fill:none;stroke-width:1.3;stroke:#2f4274"/>
+    <path d="m300.9 171.68h-52v29.755h52z" style="fill:none;stroke-width:1.6;stroke:#2f4274"/>
+   </g>
+  </g>
+  <g id="Torso">
+   <path d="m60 456v-180c0.80333-23.789 8.6569-22.149 29-22h59l80 159.8 80-159.8h59c16.911-0.8358 30.053 2.4525 29 22v180h-54v-82.133s0.90458-13.867-14.5-13.867-14.5 13.867-14.5 13.867v82.133h-170v-83.04s-0.5145-12.895-14.5-12.96c-13.986-0.0653-14.5 15.681-14.5 15.681v80.319z" style="fill:#fff;stroke-width:1px;stroke:#fff"/>
+  </g>
+  <g id="Shirt">
+   <path d="m153 254 75 146.3 75-146.3z" style="fill:#fff;stroke-width:1px;stroke:#fff"/>
+   <g id="BowTie" transform="translate(3.7 -.6)">
+    <path d="m188.4 261.7v37l19-8v-17z" style="fill:#2f4274"/>
+    <circle transform="translate(0,-1.5)" cx="225" cy="283" r="14" style="fill:#2f4274"/>
+    <path d="m242.6 273.7v17l20 8v-37z" style="fill:#2f4274"/>
+   </g>
+   <circle transform="translate(0,176.5)" cx="228.7" cy="142" r="5" style="fill:#2f4274"/>
+   <circle transform="translate(0,201.3)" cx="228.7" cy="142" r="5" style="fill:#2f4274"/>
+   <circle transform="translate(0,227.1)" cx="228.7" cy="142" r="5" style="fill:#2f4274"/>
+  </g>
+ </g>
+ <g>
+  <g transform="translate(-1.1124 -.092963)">
+   <path d="m127.42 182.86c6.1758 5.4377 20.65 19.25 26.137 22.822" style="fill:none;stroke-linecap:round;stroke-width:3;stroke:#2f4274"/>
+   <path d="m153.56 205.68c62.665-9.4907 95.255-6.078 155.38-1.2488 0.16506 9.3175-4.0462 23.121-14.596 25.166-24.922 15.634-84.794 26.968-122.05 1.5099-16.22-6.9656-17.22-12.673-18.731-25.427z" style="fill:none;stroke-width:3;stroke:#2f4274"/>
+   <path d="m336.49 181.13c-6.1758 5.4377-22.06 19.731-27.547 23.304" style="fill:none;stroke-linecap:round;stroke-width:3;stroke:#2f4274"/>
+   <path d="m193.27 214.65c26.371-8.6552 51.229-8.617 77.26-0.49337" style="fill:none;stroke-width:.8;stroke:#2f4274"/>
+   <path d="m203.37 221.86c7.1659 3.6673 50.077 3.4371 60.571-0.40759" style="fill:none;stroke-dasharray:0.5, 2;stroke-width:.5;stroke:#2f4274"/>
+   <path d="m198.34 231.36c15.865 8.0211 46.997 9.0455 63.337 0.19727" style="fill:none;stroke-width:.8;stroke:#2f4274"/>
+   <path d="m192.38 226.91c2.3745 2.0947 3.5524 2.976 5.9631 4.4498" style="fill:none;stroke-dasharray:0.80000001, 2.40000004;stroke-width:.8;stroke:#2f4274"/>
+   <path d="m267.64 227.11c-2.3745 2.0947-3.5524 2.976-5.9631 4.4498" style="fill:none;stroke-dasharray:0.80000001, 2.40000004;stroke-width:.8;stroke:#2f4274"/>
+  </g>
+ </g>
+</svg>

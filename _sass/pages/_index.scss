@@ -1,0 +1,65 @@
+// Page specific styling for index.html
+
+.pronouce
+{
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	cursor: pointer;
+
+	&:hover
+	{
+		#tts
+		{
+			opacity: 1;
+		}
+	}
+}
+
+#canvas-stats
+{
+	position: absolute !important;
+}
+
+#tts
+{
+	position: absolute;
+	font-size: 0.5em;
+	color: rgb(127, 136, 143);
+	opacity: 0;
+}
+
+@include breakpoint(">=xlarge")
+{
+	#tts
+	{
+		top: 5px;
+		left: -69px;
+	}
+}
+
+@include breakpoint("<=large")
+{
+	#tts
+	{
+		top: 5px;
+		left: -58px;
+	}
+}
+
+@include breakpoint("<=medium")
+{
+	#tts
+	{
+		top: 5px;
+		left: -58px;
+	}
+}
+
+@include breakpoint("<=small")
+{
+	#tts
+	{
+		top: 5px;
+		left: -31px;
+	}
+}

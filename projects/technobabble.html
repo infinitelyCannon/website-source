@@ -1,0 +1,182 @@
+---
+layout: page
+type: project
+title: Technobabble
+year: 2020
+logo: tech_logo.jpg
+engine: Unreal Engine 4
+order: 3
+---
+
+<p>Technobabble is a fast-paced beat ‘em up platformer that focuses on delivering an experience of fluid, free-flowing movement. This was a two semester project where I joined a team of 19 after their one semester vertical slice phase.</p>
+
+<div class="row">
+	<div class="gallery col-12" is-grid>
+		{% include image-gallery.html image="/assets/img/techno/techno1.1920x1080.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/techno/techno2.1920x1080.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/techno/techno3.1920x1080.jpg" caption="" thumb="" useBackground="true" %}
+		{% include image-gallery.html image="/assets/img/techno/techno4.1920x1080.jpg" caption="" thumb="" useBackground="true" %}
+	</div>
+</div>
+<br />
+
+<h2>Tools</h2>
+<p>
+	One of the game’s main features was a rhythm-based event system that let enemies, platforms, and menu elements act to the beat of the background music. When I joined, my first role was to develop a way to abstract the data this system worked with. The solution involved collecting all the varied data into one object type and registering it as a custom Unreal asset.
+</p>
+<div class="row">
+	<div class="gallery col-6 col-12-medium">
+		{% include image-gallery.html image="/assets/img/techno/asset.810x668.png" caption="Conductor Data Asset" thumb="" useBackground="false" %}
+	</div>
+	<div class="col-6 col-12-medium">
+		<pre style="margin: 0;"><code class="language-cpp"  style="max-height: 670px;">
+UENUM(BlueprintType)
+enum class EBeatType : uint8
+{
+	BT_OffBeat UMETA(DisplayName="OffBeat"),
+	BT_UpBeat UMETA(DisplayName="UpBeat"),
+	BT_DownBeat UMETA(DisplayName="DownBeat")
+};
+
+USTRUCT(BlueprintType)
+struct FTimelineEvent
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// The type of beat for this event
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EBeatType type;
+
+	// The time it takes place on the timeline
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float time;
+
+	// The time before which the player is considered too early
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float windowEarly;
+
+	// The time after which the player is considered too late
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float windowLate;
+};
+
+UCLASS(BlueprintType)
+class TECHNOBABBLE_API UConductorData : public UObject
+{
+	GENERATED_BODY()
+	
+public:
+	// Audio file (or Sound Cue) for playback
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundBase *Music;
+
+	// Float curve for the timelines to follow
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCurveFloat *TimelineMeasure;
+
+	// The song's bpm affects the speed of the timelines
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BPM;
+
+	// Array of timimng events
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray&lt;FTimelineEvent&gt; Events;
+};
+			</code>
+		</pre>
+	</div>
+</div>
+<p>Then, I could refactor the rhythm system to have the timelines based their entire configuration off of whichever asset it's given. The final result gave level designers the ability to script a change in music while keeping everything synced during runtime.</p>
+
+<h2>Player Controller</h2>
+<p>The movement mechanics are meant to mimic the qualities of rollerblading, so at certain times the player's input is modified:</p>
+<div class="row">
+	<div class="col-5">
+		<div class="video-gallery">
+			<video controls muted loop style="display: block;">
+				<source src="/assets/vid/techno/skid-stop.1920x1080.mp4" type="video/mp4">
+			</video>
+			<video controls muted loop style="display: none;">
+				<source src="/assets/vid/techno/slope.1920x1080.mp4" type="video/mp4">
+			</video>
+			<video controls muted loop style="display: none;">
+				<source src="/assets/vid/techno/momentum.1920x1080.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div class="slideshow-list">
+			<a><img style="background-image: url('/assets/img/techno/momentum-thumb.png');" /></a>
+			<a><img style="background-image: url('/assets/img/techno/skid-stop-thumb.png');" /></a>
+			<a><img style="background-image: url('/assets/img/techno/slope-thumb.png');" /></a>
+		</div>
+	</div>
+	<div class="col-7">
+		<ul>
+			<li>While moving above a certain speed, if the player suddenly switches their input against their current velocity, apply an impulse force in the opposite direction.</li>
+			<li>Moving on sloped surfaces will damp their max speed and apply a growing downward force if the player doesn’t provide input.</li>
+			<li>If the player stops providing input while moving, the velocity at that moment is preserved and the character slows to a stop.</li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	window.OnSetup = window.OnSetup || [];
+
+	function GetThumbName(str)
+	{
+		return str.substring(
+			str.lastIndexOf('/') + 1,
+			str.indexOf("-thumb")
+		);
+	}
+
+	function ResizeVideo()
+	{
+		var videos = $("video");
+			
+		for(var i = 0; i < videos.length; ++i)
+		{
+			var width = $(videos[i]).parent().width();
+			var src = $(videos[i]).children("source").attr("src").split(".")[1].split("x");
+			var aspect = parseInt(src[1]) / parseInt(src[0]);
+			$(videos[i]).width(width);
+			$(videos[i]).height(aspect * width);
+			$(videos[i]).parent().height(aspect * width);
+		}
+	}
+
+	function SetupVideoSlideshow()
+	{
+		$(".slideshow-list img").click(function()
+		{
+			var name = GetThumbName($(this).css("background-image"));
+			var target = $("source[src*='" + name + "']").parent();
+			var videos = target.parent().children("video");
+
+			if(!target[0].paused)
+				return;
+
+			for(var i = 0; i < videos.length; ++i)
+			{
+				if($(videos[i]).css("display") == "block")
+				{
+					videos[i].pause();
+					videos[i].currentTime = 0;
+					$(videos[i]).css("display", "none");
+				}
+			}
+
+			target.css("display", "block");
+			target[0].play();
+		});
+	}
+
+	window.OnSetup.push(function(event)
+	{
+		$(window).on("resize", ResizeVideo);
+		ResizeVideo();
+		SetupVideoSlideshow();
+	});
+</script>
+
+{% include photo-swipe.html %}
