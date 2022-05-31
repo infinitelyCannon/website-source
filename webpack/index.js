@@ -2,8 +2,8 @@ import * as Three from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 //import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 
-// Data for movement
-// Stuff that was exposed through a control panel
+// Data for movement.
+// Stuff that was exposed through a control panel.
 var Data = {
 	radius: 1,
 	color: 0x89ac9,
