@@ -1,4 +1,4 @@
-import * as Three from 'three';
+import {CircleGeometry, Matrix4, MeshBasicMaterial, InstancedMesh, Vector3, Scene, OrthographicCamera, WebGLRenderer, MathUtils} from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 //import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 
@@ -25,10 +25,10 @@ function AddMeshes()
 {
 	Clear();
 
-	const matrix = new Three.Matrix4();
-	const geometry = new Three.CircleGeometry(1, 64);
-	const material = new Three.MeshBasicMaterial({ color: Data.color });
-	mesh = new Three.InstancedMesh(geometry, material, Data.count);
+	const matrix = new Matrix4();
+	const geometry = new CircleGeometry(1, 64);
+	const material = new MeshBasicMaterial({ color: Data.color });
+	mesh = new InstancedMesh(geometry, material, Data.count);
 	let ptr = GetPrimes(Data.count);
 
 	for (let i = 0; i < Data.count; ++i)
@@ -66,7 +66,7 @@ function Clear()
 
 function GetPolarPoint(prime)
 {
-	return new Three.Vector3(
+	return new Vector3(
 		prime * Math.cos(prime),
 		prime * Math.sin(prime),
 		0
@@ -112,8 +112,8 @@ window.InitCanvas = function ()
 	canvas.width = canvas.parentElement.clientWidth;
 	canvas.height = canvas.parentElement.clientHeight;
 
-	scene = new Three.Scene();
-	camera = new Three.OrthographicCamera(
+	scene = new Scene();
+	camera = new OrthographicCamera(
 		canvas.width / -2,
 		canvas.width / 2,
 		canvas.height / 2,
@@ -121,7 +121,7 @@ window.InitCanvas = function ()
 		1,
 		20000
 	);
-	renderer = new Three.WebGLRenderer({ canvas: canvas, antialias: true });
+	renderer = new WebGLRenderer({ canvas: canvas, antialias: true });
 	renderer.setSize(canvas.width, canvas.height);
 
 	camera.position.z = 32;
@@ -150,9 +150,9 @@ window.InitCanvas = function ()
 
 function MorphMeshes(deltaTime)
 {
-	let matrix = new Three.Matrix4();
-	let scale = new Three.Matrix4();
-	let position = new Three.Vector3();
+	let matrix = new Matrix4();
+	let scale = new Matrix4();
+	let position = new Vector3();
 
 	for (let i = 0; i < Data.count; ++i)
 	{
@@ -228,12 +228,12 @@ function Tick()
 		}
 	}
 
-	camera.zoom = Three.MathUtils.lerp(
+	camera.zoom = MathUtils.lerp(
 		Pairs[CurrentIdx].zoom,
 		Pairs[NextIdx].zoom,
 		CurrentAlpha);
 	
-	Data.radius = Three.MathUtils.lerp(
+	Data.radius = MathUtils.lerp(
 		Pairs[CurrentIdx].radius,
 		Pairs[NextIdx].radius,
 		CurrentAlpha
