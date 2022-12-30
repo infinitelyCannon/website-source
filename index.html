@@ -19,7 +19,7 @@ title: Dakarai Simmons | Portfolio Site
 
 <section>
 	<header class="major">
-		<h2>Projects</h2>
+		<h2 title="v1.0">Projects</h2>
 	</header>
 	<div class="posts">
 		{% assign projects = site.pages | where: "type", "project" | sort: "order" %}
@@ -29,7 +29,7 @@ title: Dakarai Simmons | Portfolio Site
 				<img src="/assets/img/projects/{{ project.logo }}"> 
 			</a>
 			<h3>{{ project.title }} | {{ project.engine }}</h3>
-			<p>{{ site.data.excerpts[forloop.index0].excerpt }}</p>
+			<p>{{ project.excerpt }}</p>
 			<ul class="actions">
 				<li>
 					<a class="button" href="{{ project.url }}">More</a>
