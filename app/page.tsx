@@ -1,66 +1,59 @@
+import Header from "./elements/header";
+import Button from "./elements/button";
 import Image from "next/image";
-import styles from "./page.module.css";
+import {Icon} from '@iconify-icon/react';
+import IntroImage from '@/public/temp/pic10.jpg';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Header />
+      <section id="banner">
+        <div className="content">
+            <header>
+                <h1>
+                    Hi, I'm Editorial
+                    <br/>
+                    by HTML5 UP
+                </h1>
+                <p>A Free and fully responsive site template</p>
+            </header>
+            <p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+            <ul className="actions">
+                <li>
+                    <Button size="large">Learn More</Button>
+                </li>
+            </ul>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <span className="image object">
+            <Image src={IntroImage} alt="Intro Image" />
+        </span>
+      </section>
+      <section>
+        <header className="major">
+            <h2>Erat lacinia</h2>
+        </header>
+        <div className="features">
+            <article>
+                <span className="icon">
+                    <Icon icon="fa-regular:gem" width="2.75rem" />
+                </span>
+                <div className="content">
+                    <h3>Portitor ullamcorper</h3>
+                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                </div>
+            </article>
+            <article>
+                <span className="icon">
+                    <Icon icon="fa:send" width="2.75rem" />
+                </span>
+                <div className="">
+                    <h3>Sapien veroeros</h3>
+                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                </div>
+            </article>
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
