@@ -1,17 +1,15 @@
-'use client'
-
-import {Icon} from '@iconify-icon/react';
+import Icon from '@/app/elements/icon';
+import Logo from '@/app/elements/logo';
 import Image from 'next/image';
 
 export default function Header()
 {
     return (
         <header style={{display: 'flex'}}>
-            <Image id="logo" src='./logo.svg' alt='Site Logo' width={75} height={75} />
+            <Logo width="75px" height="75px" style={{color: 'light-dark(#2f4274, #2eabff)'}} />
             <div id='header'>
                 <a className="logo">
-                    <strong>Dakarai Simmons</strong>
-                    | Portfolio Site
+                    <strong>Dakarai Simmons</strong> | Portfolio Site
                 </a>
                 <ul className="icons">
                     <li>

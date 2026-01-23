@@ -1,8 +1,13 @@
 'use client'
 
-import React from 'react';
-import {Icon, IconifyIconHTMLElement, IconifyIconProps} from '@iconify-icon/react';
+import {Icon as IconifyIcon} from '@iconify-icon/react';
 
-export default function Demo ({icon, width, height}){
-    return <Icon {...attr} />;
+interface IconProps {
+    icon: string,
+    width?: string | number,
+    height?: string | number
+}
+
+export default function Icon ({icon, width, height}: IconProps){
+    return <IconifyIcon icon={icon} width={width} height={height} />;
 }

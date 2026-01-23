@@ -1,3 +1,7 @@
+@use '../libs/vendor';
+@use '../libs/functions' as func;
+@use '../libs/mixins';
+
 ///
 /// Editorial by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,15 +11,15 @@
 /* Form */
 
 	form {
-		margin: 0 0 _size(element-margin) 0;
+		margin: 0 0 func.size(element-margin) 0;
 	}
 
 	label {
-		color: _palette(fg-bold);
+		color: func.palette(fg-bold);
 		display: block;
 		font-size: 0.9em;
-		font-weight: _font(weight-bold);
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+		font-weight: func.font(weight-bold);
+		margin: 0 0 (func.size(element-margin) * 0.5) 0;
 	}
 
 	input[type="text"],
@@ -26,11 +30,11 @@
 	input[type="url"],
 	select,
 	textarea {
-		@include vendor('appearance', 'none');
-		background: _palette(bg);
-		border-radius: _size(border-radius);
+		@include vendor.vendor('appearance', 'none');
+		background: func.palette(bg);
+		border-radius: func.size(border-radius);
 		border: none;
-		border: solid 1px _palette(border);
+		border: solid 1px func.palette(border);
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -43,23 +47,23 @@
 		}
 
 		&:focus {
-			border-color: _palette(accent);
-			box-shadow: 0 0 0 1px _palette(accent);
+			border-color: func.palette(accent);
+			box-shadow: 0 0 0 1px func.palette(accent);
 		}
 	}
 
 	select {
-		background-image: svg-url("<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'><path d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='#{_palette(border)}' /></svg>");
+		background-image: mixins.svg-url("<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'><path d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='#{func.palette(border)}' /></svg>");
 		background-size: 1.25em;
 		background-repeat: no-repeat;
 		background-position: calc(100% - 1em) center;
-		height: _size(element-height);
-		padding-right: _size(element-height);
+		height: func.size(element-height);
+		padding-right: func.size(element-height);
 		text-overflow: ellipsis;
 
 		option {
-			color: _palette(fg-bold);
-			background: _palette(bg);
+			color: func.palette(fg-bold);
+			background: func.palette(bg);
 		}
 
 		&:focus {
@@ -80,16 +84,21 @@
 	input[type="search"],
 	input[type="url"],
 	select {
-		height: _size(element-height);
+		height: func.size(element-height);
 	}
 
 	textarea {
 		padding: 0.75em 1em;
 	}
 
+	/*
+	Note: removing the Font Awesome styling breaks the appearence of 
+	radio and check boxes. But I do not intend to have forms on my 
+	site so I'll cross that bridge if I ever get there.
+	*/
 	input[type="checkbox"],
 	input[type="radio"] {
-		@include vendor('appearance', 'none');
+		@include vendor.vendor('appearance', 'none');
 		display: block;
 		float: left;
 		margin-right: -2em;
@@ -98,46 +107,46 @@
 		z-index: -1;
 
 		& + label {
-			@include icon(false, solid);
-			color: _palette(fg);
+			text-decoration: none;
+			color: func.palette(fg);
 			cursor: pointer;
 			display: inline-block;
 			font-size: 1em;
-			font-weight: _font(weight);
-			padding-left: (_size(element-height) * 0.6) + 0.75em;
+			font-weight: func.font(weight);
+			padding-left: (func.size(element-height) * 0.6) + 0.75em;
 			padding-right: 0.75em;
 			position: relative;
 
 			&:before {
-				background: _palette(bg);
-				border-radius: _size(border-radius);
-				border: solid 1px _palette(border);
+				background: func.palette(bg);
+				border-radius: func.size(border-radius);
+				border: solid 1px func.palette(border);
 				content: '';
 				display: inline-block;
 				font-size: 0.8em;
-				height: (_size(element-height) * 0.75);
+				height: (func.size(element-height) * 0.75);
 				left: 0;
-				line-height: (_size(element-height) * 0.75);
+				line-height: (func.size(element-height) * 0.75);
 				position: absolute;
 				text-align: center;
 				top: 0;
-				width: (_size(element-height) * 0.75);
+				width: (func.size(element-height) * 0.75);
 			}
 		}
 
 		&:checked + label {
 			&:before {
-				background: _palette(fg-bold);
-				border-color: _palette(fg-bold);
-				color: _palette(bg);
+				background: func.palette(fg-bold);
+				border-color: func.palette(fg-bold);
+				color: func.palette(bg);
 				content: '\f00c';
 			}
 		}
 
 		&:focus + label {
 			&:before {
-				border-color: _palette(accent);
-				box-shadow: 0 0 0 1px _palette(accent);
+				border-color: func.palette(accent);
+				box-shadow: 0 0 0 1px func.palette(accent);
 			}
 		}
 	}
@@ -145,7 +154,7 @@
 	input[type="checkbox"] {
 		& + label {
 			&:before {
-				border-radius: _size(border-radius);
+				border-radius: func.size(border-radius);
 			}
 		}
 	}
@@ -159,21 +168,21 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: _palette(fg-light) !important;
+		color: func.palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: _palette(fg-light) !important;
+		color: func.palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: _palette(fg-light) !important;
+		color: func.palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: _palette(fg-light) !important;
+		color: func.palette(fg-light) !important;
 		opacity: 1.0;
 	}

@@ -1,3 +1,5 @@
+@use '../libs/mixins';
+
 ///
 /// Editorial by HTML5 UP
 /// html5up.net | @ajlkn
@@ -7,27 +9,11 @@
 /* Icon */
 
 	.icon {
-		@include icon;
+		text-decoration: none;
 		border-bottom: none;
 		position: relative;
 
 		> .label {
 			display: none;
-		}
-
-		&:before {
-			line-height: inherit;
-		}
-
-		&.solid {
-			&:before {
-				font-weight: 900;
-			}
-		}
-
-		&.brands {
-			&:before {
-				font-family: 'Font Awesome 5 Brands';
-			}
 		}
 	}

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // Misc.
 	$misc: (
 		z-index-base:		10000
@@ -33,12 +35,35 @@
 
 // Palette.
 	$palette: (
-		bg:					#ffffff,
-		bg-alt:				#f5f6f7,
-		fg:					#7f888f,
-		fg-bold:			#3d4449,
-		fg-light:			#9fa3a6,
-		border:				rgba(210,215,217,0.75),
-		border-bg:			transparentize(#e6ebed, 0.75),
-		accent:				#f56a6a
+		bg:						#ffffff,
+		bg-alt:					#f5f6f7,
+		bg-alt-sidebar:     	color.adjust(#f5f6f7, $lightness: -2%, $space: hsl),
+		fg:						#7f888f,
+		fg-bold:				#3d4449,
+		fg-light:				#9fa3a6,
+		sidebar-toggle-after: 	color.adjust(#7f888f, $lightness: 35%, $alpha: -0.25, $space: hsl),
+		border:					rgba(210,215,217,0.75),
+		border-bg:				color.adjust(#e6ebed, $alpha: -0.75),
+		accent:					#2f4274,
+		btn-hover:				color.adjust(#2f4274, $alpha: -0.95),
+		btn-active:				color.adjust(#2f4274, $alpha: -0.85),
+		btn-primary-hover:  	color.adjust(#2f4274, $lightness: 3%, $space: hsl),
+		btn-primary-active: 	color.adjust(#2f4274, $lightness: -3%, $space: hsl)
+	);
+
+	$palette-dark: (
+		bg:						#121212,
+		bg-alt:					#888888,
+		bg-alt-sidebar:     	color.adjust(#888888, $lightness: -2%, $space: hsl),
+		fg:						#e0e0e0,
+		fg-bold:				#b0b0b0,
+		fg-light:				#9fa3a6,
+		sidebar-toggle-after: 	color.adjust(#7f888f, $lightness: 35%, $alpha: -0.25, $space: hsl),
+		border:					#444444,//rgba(210,215,217,0.75),
+		border-bg:				color.adjust(#e6ebed, $alpha: -0.75),
+		accent:					#2eabff,
+		btn-hover:				color.adjust(#2eabff, $alpha: -0.95),
+		btn-active:				color.adjust(#2eabff, $alpha: -0.85),
+		btn-primary-hover:  	color.adjust(#2eabff, $lightness: 5%, $space: hsl),
+		btn-primary-active: 	color.adjust(#2eabff, $lightness: -5%, $space: hsl)
 	);

@@ -25,9 +25,10 @@ import clsx from 'clsx';
             large: size === "large",
             small: size === "small",
             fit: fit,
-            disabled: disabled
+            disabled: disabled,
+            icon: iconID
         })}>
-            {iconID && <Icon icon={iconID} />}
+            {iconID && <Icon icon={iconID} height="1.4em" />}
             {children}
         </a>
     );
